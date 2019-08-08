@@ -10,5 +10,5 @@ import config from './config/keys';
   imports:  [MongooseModule.forRoot(config.mongoURI , { useNewUrlParser: true }),BooksModule, AuthModule],
   controllers: [AppController],
   providers: [AppService],
-}) // Прочитать за { useNewUrlParser: true } . Нахуя оно нам????
+}) // ?
 export class AppModule {}
