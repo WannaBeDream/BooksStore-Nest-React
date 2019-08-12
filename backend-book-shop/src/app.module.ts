@@ -1,20 +1,23 @@
+//nest modules
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 //Controllers
 import { AppController } from './app.controller';
-import { BooksController } from './Controllers/books/books.controller';
-import { UsersController } from './Controllers/users/users.controller';
-import { AuthController } from './Controllers/auth/auth.controller';
-import { AuthorsController } from './Controllers/authors/authors.controller';
+import { BooksController } from '@BooksController';
+import { UsersController } from '@UsersController';
+import { AuthController } from '@AuthController';
+import { AuthorsController } from '@AuthorsController';
 //Services
 import { AppService } from './app.service';
-import { BooksService } from './Services/books/books.service';
-import { UsersService } from './Services/users/users.service';
-import { AuthService } from './Services/auth/auth.service';
-import { AuthorsService } from './Services/authors/authors.service';
+import { BooksService } from '@BooksService';
+import { UsersService } from '@UsersService';
+import { AuthService } from '@AuthService';
+import { AuthorsService } from '@AuthorsService';
 //Schemas
-import { BookSchema, UserSchema } from './Repositories/schemas/index';
-import config from './Environment/config/keys';
+import { BookSchema } from '@bookSchema';
+import { UserSchema } from '@userSchema';
+//Config
+import config from '@config';
 
 @Module({
   imports:  [MongooseModule.forRoot(config.mongoURI , { useNewUrlParser: true }),

@@ -1,12 +1,12 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose'
 import { Model } from 'mongoose';
-import { Book } from '../interfaces/book.interface';
-import { BookDTO } from '../dto/book.dto';
+import { Book } from '../models/book.interface';
+
 
 @Injectable()
 export class BooksService {
-    constructor(@InjectModel('Book') private readonly bookModel: Model<Book>) {}
+    constructor(@InjectModel('Books') private readonly bookModel: Model<Book>) {}
 
     async findAll(): Promise<Book[]> {
         return await this.bookModel.find();
@@ -16,8 +16,8 @@ export class BooksService {
         return await this.bookModel.findOne({ _id: id });
     }
 
-    async create(createBookDto: BookDTO): Promise<Book> {
-        const createdBook = new this.bookModel(createBookDto);
+    async create(Book: Book): Promise<Book> { // changed dto to interface
+        const createdBook = new this.bookModel(Book);
         return await createdBook.save();
     }
 
@@ -25,7 +25,7 @@ export class BooksService {
         return await this.bookModel.findByIdAndRemove(id);
     }
 
-    async update(id: string, book: BookDTO): Promise<Book> {
+    async update(id: string, book: Book): Promise<Book> {
         return await this.bookModel.findByIdAndUpdate(id, book, { new: true });
  }
 
