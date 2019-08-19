@@ -8,24 +8,7 @@
     "target": "es2017",
     "sourceMap": true,
     "outDir": "./dist",
-    "baseUrl": "./src",
-    "paths": {  
-      "@BooksController": ["./controllers/book.controller"], // Путь относительно "baseUrl".
-      "@UsersController": ["./controllers/user.controller"], 
-      "@AuthController": ["./controllers/auth.controller"], 
-      "@AuthorsController": ["./controllers/author.controller"], 
-
-      "@BooksService": ["./services/book.service"], 
-      "@UsersService": ["./services/user.service"], 
-      "@AuthService": ["./services/auth.service"], 
-      "@AuthorsService": ["./services/author.service"], 
-
-      "@config": ["./environment/config/keys"], 
-
-      "@bookSchema": ["./documents/book/book.schema"], 
-      "@userSchema": ["./documents/user/user.schema"], 
-
-    },
+    "baseUrl": "./",
     "incremental": true
   },
   "exclude": ["node_modules", "dist"]

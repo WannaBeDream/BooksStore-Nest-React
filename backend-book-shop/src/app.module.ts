@@ -2,31 +2,31 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 //Controllers
-import { AppController } from './app.controller';
-import { BooksController } from '@BooksController';
-import { UsersController } from '@UsersController';
-import { AuthController } from '@AuthController';
-import { AuthorsController } from '@AuthorsController';
+import { AppController } from 'src/app.controller';
+import { BooksController } from 'src/controllers/book.controller'; 
+import { UsersController } from 'src/controllers/user.controller';
+import { AuthController } from 'src/controllers/auth.controller';
+import { AuthorsController } from 'src/controllers/author.controller';
 //Services
-import { AppService } from './app.service';
-import { BooksService } from '@BooksService';
-import { UsersService } from '@UsersService';
-import { AuthService } from '@AuthService';
-import { AuthorsService } from '@AuthorsService';
+import { AppService } from 'src/app.service';
+import { BooksService } from 'src/services/book.service';
+import { UsersService } from 'src/services/user.service';
+import { AuthService } from 'src/services/auth.service';
+import { AuthorsService } from 'src/services/author.service';
 //Schemas
-import { BookSchema } from '@bookSchema';
-import { UserSchema } from '@userSchema';
+import { BookSchema } from 'src/documents/book/book.schema';
+import { UserSchema } from 'src/documents/user/user.schema';
 //Config
-import config from '@config';
+import config from 'src/environment/config-dev/keys';
 
 @Module({
-  imports:  [MongooseModule.forRoot(config.mongoURI , { useNewUrlParser: true }),
+  imports:  [MongooseModule.forRoot(config.mongoURI , { useNewUrlParser: true, useFindAndModify: false }),
     MongooseModule.forFeature([
       { name: 'Books', schema: BookSchema },
       { name: 'Users', schema: UserSchema }
     ]
   )
-], // 10.09 add AuthModule 
+], 
   controllers: [AppController,
                 BooksController,
                 AuthController,

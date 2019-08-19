@@ -1,32 +1,42 @@
-import { Controller, Get, Param, Post, Body, Query, Delete, Put } from '@nestjs/common';
-import { BooksService } from '@BooksService';
-import { Book } from '../models/book.interface';
+import { Controller, Get, Param, Post, Body, Query,NotFoundException, Delete, Put, Response,HttpStatus } from '@nestjs/common';
+import { BooksService } from 'src/services/book.service';
+import { Book } from 'src/models/book.model';
 
 @Controller('books')
 export class BooksController {
     constructor(private booksService: BooksService) { }
 
-    @Get('getAll')
-    async getBooks() {
+    @Get('')
+    async getBooks(@Response() res) {
         const books = await this.booksService.findAll();
+        return res.status(HttpStatus.OK).json(books);
+    }
+
+    @Get(':bookID')
+    async getBook(@Response() res,@Param('bookID') bookID) {
+        const book = await this.booksService.findOne(bookID);
+        if (!book) throw new NotFoundException('Book does not exist!');
+        return res.status(HttpStatus.OK).json(book);
+    }
+
+    @Post('')
+    async addBook(@Response() res,@Body() book: Book) {
+        const newBook = await this.booksService.create(book);
+        return res.status(HttpStatus.OK).json({
+            message: "Book has been submitted successfully!",
+            post: newBook
+        })
+    }
+
+    @Delete(':bookID')
+    async deleteBook(@Param(':bookID') bookID) {
+        const books = await this.booksService.delete(bookID); 
         return books;
     }
 
-    @Get('getById/:bookID')
-    async getBook(@Param('bookID') bookID) {
-        const book = await this.booksService.findOne(bookID);
-        return book;
-    }
-
-    @Post('create')
-    async addBook(@Body() Book: Book) {
-        const book = await this.booksService.create(Book);
-        return book;
-    }
-
-    @Delete('')
-    async deleteBook(@Query() query) {
-        const books = await this.booksService.delete(query.bookID);
+    @Put(':bookID')
+    async editBook(@Param('bookID') bookID,@Body() Book: Book) { 
+        const books = await this.booksService.update(bookID,Book)
         return books;
     }
 
