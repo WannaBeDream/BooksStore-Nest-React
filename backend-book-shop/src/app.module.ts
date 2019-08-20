@@ -22,7 +22,7 @@ import config from 'src/environment/config-dev/keys';
 //Providers
 import { databaseProviders } from 'src/providers/database.providers';
 import { booksProviders } from 'src/providers/books.providers'
-
+// Repositories
 import { BookRepository } from 'src/repositories/book.repository'
 
 @Module({
@@ -44,9 +44,9 @@ import { BookRepository } from 'src/repositories/book.repository'
               AuthService,
               AuthorsService,
               UsersService,
+              BookRepository,
               ...databaseProviders,
-              ...booksProviders,
-              BookRepository
+              ...booksProviders
   ]
 }) 
 export class AppModule {}

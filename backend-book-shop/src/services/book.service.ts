@@ -11,7 +11,7 @@ export class BooksService {
         return await this.bookRepository.findAll();
     }
 
-    async findOne(id: string): Promise<Book> {
+    async findOne(id: String): Promise<Book> {
         return await this.bookRepository.findOne(id);
     }
 
@@ -19,11 +19,11 @@ export class BooksService {
         return await this.bookRepository.create(book);
     }
 
-    async delete(id: string): Promise<Book> {
+    async delete(id: String): Promise<Book> {
         return await this.bookRepository.delete(id);
     }
 
-    async update(id: string, book: Book): Promise<Book> {
+    async update(id: String, book: Book): Promise<Book> {
         return await this.bookRepository.update(id, book);
  }
 

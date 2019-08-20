@@ -1,10 +1,10 @@
 import { Document } from 'mongoose';
 
 export interface Book extends Document {
-  readonly  id?: string;
-  readonly  title?: string;
-  readonly  description: string;
+  readonly  id?: String;
+  readonly  title?: String;
+  readonly  description: String;
   readonly  authors?: any[];
-  readonly  coast?: string;
+  readonly  coast?: String;
     
 }

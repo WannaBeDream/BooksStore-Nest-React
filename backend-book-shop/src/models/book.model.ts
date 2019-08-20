@@ -1,8 +1,8 @@
 export interface Book  {
-    id?: string;
-    title?: string;
-    description: string;
+    id?: String;
+    title?: String;
+    description: String;
     authors?: any[];
-    coast?: string;
+    coast?: String;
     
 }
