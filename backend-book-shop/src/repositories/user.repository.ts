@@ -24,12 +24,14 @@ export class UserRepository {
     return await this.userModel.findOne({ _id: id });
   }
 
+  async update(id: String, user: User): Promise<User> {
+    return await this.userModel.findByIdAndUpdate(id, user, { new: true });
+  }
+
   async delete(id: String): Promise<User> {
     return await this.userModel.findByIdAndRemove(id);
   } 
 
-  async update(id: String, user: User): Promise<User> {
-    return await this.userModel.findByIdAndUpdate(id, user, { new: true });
-  }
+
   
 }

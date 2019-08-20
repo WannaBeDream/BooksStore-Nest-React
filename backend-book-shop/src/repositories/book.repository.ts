@@ -24,12 +24,14 @@ export class BookRepository {
     return await this.bookModel.findOne({ _id: id });
   }
 
+  async update(id: String, book: Book): Promise<Book> {
+    return await this.bookModel.findByIdAndUpdate(id, book, { new: true });
+  }
+
   async delete(id: String): Promise<Book> {
     return await this.bookModel.findByIdAndRemove(id);
   } 
 
-  async update(id: String, book: Book): Promise<Book> {
-    return await this.bookModel.findByIdAndUpdate(id, book, { new: true });
-  }
+  
   
 }

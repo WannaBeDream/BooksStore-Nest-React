@@ -20,11 +20,13 @@ export class UsersService {
     }
 
     async update(id: String, user: User): Promise<User> {
-        return await this.userRepository.update(id, user);
+        const updatedUser = await this.userRepository.update(id, user);
+        return updatedUser;
     }
 
     async delete(id: String): Promise<User> {
-        return await this.userRepository.delete(id);
+        const deletedUser = await this.userRepository.delete(id);
+        return deletedUser;
     }
 
     
