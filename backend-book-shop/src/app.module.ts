@@ -19,6 +19,12 @@ import { UserSchema } from 'src/documents/user/user.schema';
 //Config
 import config from 'src/environment/config-dev/keys';
 
+//Providers
+import { databaseProviders } from 'src/providers/database.providers';
+import { booksProviders } from 'src/providers/books.providers'
+
+import { BookRepository } from 'src/repositories/book.repository'
+
 @Module({
   imports:  [MongooseModule.forRoot(config.mongoURI , { useNewUrlParser: true, useFindAndModify: false }),
     MongooseModule.forFeature([
@@ -38,6 +44,9 @@ import config from 'src/environment/config-dev/keys';
               AuthService,
               AuthorsService,
               UsersService,
-  ],
+              ...databaseProviders,
+              ...booksProviders,
+              BookRepository
+  ]
 }) 
 export class AppModule {}
