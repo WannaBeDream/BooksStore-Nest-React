@@ -22,17 +22,12 @@ import config from 'src/environment/config-dev/keys';
 //Providers
 import { databaseProviders } from 'src/providers/database.providers';
 import { booksProviders } from 'src/providers/books.providers'
+import { usersProviders } from 'src/providers/users.providers'
 // Repositories
 import { BookRepository } from 'src/repositories/book.repository'
+import { UserRepository } from 'src/repositories/user.repository'
 
 @Module({
-  imports:  [MongooseModule.forRoot(config.mongoURI , { useNewUrlParser: true, useFindAndModify: false }),
-    MongooseModule.forFeature([
-      { name: 'Books', schema: BookSchema },
-      { name: 'Users', schema: UserSchema }
-    ]
-  )
-], 
   controllers: [AppController,
                 BooksController,
                 AuthController,
@@ -45,8 +40,10 @@ import { BookRepository } from 'src/repositories/book.repository'
               AuthorsService,
               UsersService,
               BookRepository,
+              UserRepository,
               ...databaseProviders,
-              ...booksProviders
+              ...booksProviders,
+              ...usersProviders
   ]
 }) 
 export class AppModule {}

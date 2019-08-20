@@ -30,16 +30,17 @@ export class UsersController {
         })
     }
 
+    @Put(':userID')
+    async editBook(@Param('userID') userID,@Body() User: User) { 
+        const users = await this.usersService.update(userID,User)
+        return users;
+    }
+
     @Delete(':userID')
     async deleteBook(@Param(':userID') userID) {
         const users = await this.usersService.delete(userID); 
         return users;
     }
 
-    @Put(':userID')
-    async editBook(@Param('userID') userID,@Body() User: User) { 
-        const users = await this.usersService.update(userID,User)
-        return users;
-    }
 
 }

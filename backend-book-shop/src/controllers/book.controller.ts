@@ -28,16 +28,19 @@ export class BooksController {
         })
     }
 
-    @Delete(':bookID')
-    async deleteBook(@Param(':bookID') bookID) {
-        const books = await this.booksService.delete(bookID); 
-        return books;
-    }
 
     @Put(':bookID')
     async editBook(@Param('bookID') bookID,@Body() Book: Book) { 
         const books = await this.booksService.update(bookID,Book)
         return books;
     }
+
+    @Delete(':bookID')
+    async deleteBook(@Param(':bookID') bookID) {
+        const books = await this.booksService.delete(bookID); 
+        return books;
+    }
+
+    
 
 }
