@@ -2,6 +2,7 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { PassportModule } from '@nestjs/passport';
+import { JwtModule } from '@nestjs/jwt';
 //Controllers
 import { AppController } from 'src/controllers/app.controller';
 import { BooksController } from 'src/controllers/book.controller'; 
@@ -32,6 +33,15 @@ import { UserRepository } from 'src/repositories/user.repository'
 import { LocalStrategy } from 'src/strategy/local.strategy';
 
 @Module({
+  imports: [
+    PassportModule.register({ defaultStrategy: 'jwt' }),
+    JwtModule.register({
+      secret: 'secretKey',
+      signOptions: {
+        expiresIn: '60s'
+      },
+    }),
+  ],
   controllers: [AppController,
                 BooksController,
                 AuthController,
