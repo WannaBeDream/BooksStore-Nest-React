@@ -22,7 +22,7 @@ export class UsersController {
     }
 
     @Post('')
-    async addBook(@Response() res,@Body() user: User) {
+    async addUser(@Response() res,@Body() user: User) {
         const newUser = await this.usersService.create(user);
         return res.status(HttpStatus.OK).json({
             message: "User has been submitted successfully!",
@@ -31,22 +31,22 @@ export class UsersController {
     }
 
     @Put(':userID')
-    async editBook(@Param('userID') userID,@Body() User: User) { 
+    async editUser(@Param('userID') userID,@Body() User: User) { 
         const users = await this.usersService.update(userID,User)
         return users;
     }
 
     @Delete(':userID')
-    async deleteBook(@Param('userID') userID) {
-        const users = await this.usersService.delete(userID); 
-        return users;
+    async deleteUser(@Param('userID') userID) {
+        const user = await this.usersService.delete(userID); 
+        return user;
     }
 
     @Get('user/:username')
     async getUserByName(@Response() res,@Param('username') user) {
         const fetchedUser = await this.usersService.findOneByUsername(user);
 
-        
+
         if (!fetchedUser) throw new NotFoundException('User does not exist!');
         return res.status(HttpStatus.OK).json(fetchedUser);
     }
