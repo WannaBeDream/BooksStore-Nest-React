@@ -37,9 +37,18 @@ export class UsersController {
     }
 
     @Delete(':userID')
-    async deleteBook(@Param(':userID') userID) {
+    async deleteBook(@Param('userID') userID) {
         const users = await this.usersService.delete(userID); 
         return users;
+    }
+
+    @Get('user/:username')
+    async getUserByName(@Response() res,@Param('username') user) {
+        const fetchedUser = await this.usersService.findOneByUsername(user);
+
+        
+        if (!fetchedUser) throw new NotFoundException('User does not exist!');
+        return res.status(HttpStatus.OK).json(fetchedUser);
     }
 
 

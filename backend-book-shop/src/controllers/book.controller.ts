@@ -30,13 +30,13 @@ export class BooksController {
 
 
     @Put(':bookID')
-    async editBook(@Param('bookID') bookID,@Body() Book: Book) { 
+    async editBook(@Param('bookID') bookID: String,@Body() Book: Book) { 
         const books = await this.booksService.update(bookID,Book)
         return books;
     }
 
     @Delete(':bookID')
-    async deleteBook(@Param(':bookID') bookID) {
+    async deleteBook(@Param(':bookID') bookID: String) {
         const books = await this.booksService.delete(bookID); 
         return books;
     }

@@ -4,6 +4,7 @@ import { User } from 'src/models/user.model';
 
 @Injectable()
 export class UsersService {
+    
     constructor(private readonly userRepository: UserRepository) {}
 
     
@@ -28,6 +29,12 @@ export class UsersService {
         const deletedUser = await this.userRepository.delete(id);
         return deletedUser;
     }
+
+     async findOneByUsername(user: string): Promise<User | undefined> {
+    return await this.userRepository.findOneByName(user);
+  }
+
+
 
     
 

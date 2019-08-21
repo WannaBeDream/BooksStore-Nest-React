@@ -13,23 +13,28 @@ export class BookRepository {
 
   async create(book: Book): Promise<Book> {
     const createdBook = new this.bookModel(book);
-    return await createdBook.save();
+    const newBook = await createdBook.save();
+    return newBook;
   }
 
   async findAll(): Promise<Book[]> {
-    return await this.bookModel.find().exec();
+   const books = await this.bookModel.find().exec();
+    return books
   }
 
   async findOne(id: String): Promise<Book> {
-    return await this.bookModel.findOne({ _id: id });
+    const book = await this.bookModel.findOne({ _id: id });
+    return book;
   }
 
   async update(id: String, book: Book): Promise<Book> {
-    return await this.bookModel.findByIdAndUpdate(id, book, { new: true });
+    const updatedBook = await this.bookModel.findByIdAndUpdate(id, book, { new: true });
+    return updatedBook;
   }
 
   async delete(id: String): Promise<Book> {
-    return await this.bookModel.findByIdAndRemove(id);
+    const deletedBook = await this.bookModel.deleteOne(id); // use method delete(id)
+    return deletedBook;
   } 
 
   

@@ -44,6 +44,9 @@ import { UserRepository } from 'src/repositories/user.repository'
               ...databaseProviders,
               ...booksProviders,
               ...usersProviders
+  ],
+  exports:    [
+              UsersService
   ]
 }) 
 export class AppModule {}
