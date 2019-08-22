@@ -16,7 +16,7 @@ import { UsersService } from 'src/services/user.service';
 import { AuthService } from 'src/services/auth.service';
 import { AuthorsService } from 'src/services/author.service';
 //Schemas
-import { BookSchema } from 'src/documents/book/book.schema';
+import { BookSchema } from 'src/documents/book/book.schema';      //переиспользую
 import { UserSchema } from 'src/documents/user/user.schema';
 //Config
 import config from 'src/environment/config-dev/keys';
@@ -39,7 +39,7 @@ import { LocalStrategy } from 'src/strategy/local.strategy';
     JwtModule.register({
       secret: 'secretKey',
       signOptions: {
-        expiresIn: '60s'
+        expiresIn: '600s'
       },
     }), 
   ],

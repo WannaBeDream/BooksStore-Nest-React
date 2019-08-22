@@ -46,7 +46,6 @@ export class UsersController {
     async getUserByName(@Response() res,@Param('username') user) {
         const fetchedUser = await this.usersService.findOneByUsername(user);
 
-
         if (!fetchedUser) throw new NotFoundException('User does not exist!');
         return res.status(HttpStatus.OK).json(fetchedUser);
     }
