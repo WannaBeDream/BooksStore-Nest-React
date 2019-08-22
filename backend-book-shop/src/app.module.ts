@@ -30,17 +30,18 @@ import { BookRepository } from 'src/repositories/book.repository'
 import { UserRepository } from 'src/repositories/user.repository'
 
 // JWT
+import { JwtStrategy } from 'src/strategy/jwt.strategy';
 import { LocalStrategy } from 'src/strategy/local.strategy';
 
 @Module({
   imports: [
-    PassportModule.register({ defaultStrategy: 'jwt' }),
+    PassportModule,
     JwtModule.register({
       secret: 'secretKey',
       signOptions: {
         expiresIn: '60s'
       },
-    }),
+    }), 
   ],
   controllers: [AppController,
                 BooksController,
@@ -54,6 +55,7 @@ import { LocalStrategy } from 'src/strategy/local.strategy';
               UsersService,
               BookRepository,
               UserRepository,
+              JwtStrategy,
               LocalStrategy,
               ...databaseProviders,
               ...booksProviders,
