@@ -21,6 +21,8 @@ constructor(private readonly authService: AuthService) {}
   @UseGuards(AuthGuard('jwt'))
   @Get('me')
    getProfile(@Request() req) {
+     console.log('req.user: '+ req.user);
     return req.user;
+    
   }
 }
