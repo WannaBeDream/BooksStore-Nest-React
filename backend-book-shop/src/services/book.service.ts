@@ -20,7 +20,7 @@ export class BooksService {
 
     async update(id: string, book: Book): Promise<Book> {
         const updatedBook = await this.bookRepository.update(id, book);
-         return updatedBook;
+        return updatedBook;
     }
 
     async delete(id: string): Promise<Book> {
