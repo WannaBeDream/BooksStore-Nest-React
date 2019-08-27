@@ -5,5 +5,5 @@ export const BookSchema = new mongoose.Schema({
     title: String,
     description: String,
     authors: [],
-    coast: String
-})
+    coast: String,
+});

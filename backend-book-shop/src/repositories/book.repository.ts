@@ -1,8 +1,6 @@
-
 import { Model } from 'mongoose';
 import { Injectable, Inject } from '@nestjs/common';
 import { Book } from 'src/documents/book/db.data';
-
 
 @Injectable()
 export class BookRepository {
@@ -19,24 +17,22 @@ export class BookRepository {
 
   async findAll(): Promise<Book[]> {
    const books = await this.bookModel.find().exec();
-    return books
+    return books;
   }
 
-  async findOne(id: String): Promise<Book> {
+  async findOne(id: string): Promise<Book> {
     const book = await this.bookModel.findOne({ _id: id });
     return book;
   }
 
-  async update(id: String, book: Book): Promise<Book> {
+  async update(id: string, book: Book): Promise<Book> {
     const updatedBook = await this.bookModel.findByIdAndUpdate(id, book, { new: true });
     return updatedBook;
   }
 
-  async delete(id: String): Promise<Book> {
+  async delete(id: string): Promise<Book> {
     const deletedBook = await this.bookModel.deleteOne(id); // use method delete(id)
     return deletedBook;
-  } 
+  }
 
-  
-  
 }
