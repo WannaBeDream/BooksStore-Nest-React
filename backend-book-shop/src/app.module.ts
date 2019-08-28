@@ -25,9 +25,11 @@ import config from 'src/environment/config-dev/keys';
 import { databaseProviders } from 'src/providers/database.providers';
 import { booksProviders } from 'src/providers/books.providers';
 import { usersProviders } from 'src/providers/users.providers';
+import { authorsProviders } from 'src/providers/authors.providers';
 // Repositories
 import { BookRepository } from 'src/repositories/book.repository';
 import { UserRepository } from 'src/repositories/user.repository';
+import { AuthorRepository } from 'src/repositories/author.repository';
 
 // JWT
 import { JwtStrategy } from 'src/strategy/jwt.strategy';
@@ -55,11 +57,13 @@ import { LocalStrategy } from 'src/strategy/local.strategy';
               UsersService,
               BookRepository,
               UserRepository,
+              AuthorRepository,
               JwtStrategy,
               LocalStrategy,
               ...databaseProviders,
               ...booksProviders,
               ...usersProviders,
+              ...authorsProviders,
   ],
 })
 export class AppModule {}

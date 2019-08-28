@@ -29,7 +29,7 @@ export class UsersService {
     }
 
      async findOneByUsername(user: string): Promise<User | undefined> {
-    return await this.userRepository.findOneByName(user);
+     return await this.userRepository.findOneByName(user);
   }
 
 }
