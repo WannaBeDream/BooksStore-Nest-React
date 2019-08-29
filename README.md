@@ -10,14 +10,13 @@ $ npm install
 # development
 $ npm run start
 
-Go to http://localhost:3000/swagger to check more information.
-
 # watch mode
 $ npm run start:dev
 
 # production mode
 $ npm run start:prod
 ```
+Go to http://localhost:3000/swagger to check more information after server running.
 
 ## Test
 
