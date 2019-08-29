@@ -10,6 +10,8 @@ $ npm install
 # development
 $ npm run start
 
+Go to http://localhost:3000/swagger to check more information.
+
 # watch mode
 $ npm run start:dev
 
