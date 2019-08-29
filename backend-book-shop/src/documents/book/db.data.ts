@@ -1,9 +1,9 @@
-import { Document } from 'mongoose';
+import { Document, Schema } from 'mongoose';
 
 export interface Book extends Document {
-  readonly  id?: string;
+  readonly  _id?: Schema.Types.ObjectId;
   readonly  title?: string;
   readonly  description: string;
-  readonly  authors?: any[];
+  readonly  authors?: string[];
   readonly  coast?: string;
 }

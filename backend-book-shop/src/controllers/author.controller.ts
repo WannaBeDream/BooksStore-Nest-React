@@ -1,19 +1,26 @@
 import { Controller, Get, Param, Post, Body, NotFoundException, Delete, Put, Response, HttpStatus } from '@nestjs/common';
 import { AuthorsService } from 'src/services/author.service';
 import { Author } from 'src/models/author.model';
+import { ApiUseTags, ApiResponse , ApiBearerAuth } from '@nestjs/swagger';
 
+@ApiUseTags('authors-controller')
+@ApiBearerAuth()
 @Controller('authors')
 export class AuthorsController {
 
     constructor(private authorsService: AuthorsService) { }
 
     @Get('')
+    @ApiResponse({ status: 201, description: 'The authors has been successfully fetched.'})
+    @ApiResponse({ status: 403, description: 'Forbidden.'})
     async getAuthors(@Response() res) {
         const authors = await this.authorsService.findAll();
         return res.status(HttpStatus.OK).json(authors);
     }
 
     @Get(':authorID')
+    @ApiResponse({ status: 201, description: 'The author has been successfully fetched.'})
+    @ApiResponse({ status: 403, description: 'Forbidden.'})
     async getAuthor(@Response() res, @Param('authorID') authorID) {
         const author = await this.authorsService.findOne(authorID);
         if (!author) {throw new NotFoundException('Author does not exist!'); }
@@ -21,6 +28,8 @@ export class AuthorsController {
     }
 
     @Post('')
+    @ApiResponse({ status: 201, description: 'The author has been successfully created.'})
+    @ApiResponse({ status: 403, description: 'Forbidden.'})
     async addAuthor(@Response() res, @Body() author: Author) {
         const newAuthor = await this.authorsService.create(author);
         return res.status(HttpStatus.OK).json({
@@ -30,12 +39,16 @@ export class AuthorsController {
     }
 
     @Put(':authorID')
+    @ApiResponse({ status: 201, description: 'The author has been successfully edited.'})
+    @ApiResponse({ status: 403, description: 'Forbidden.'})
     async editAuthor(@Param('authorID') authorID, @Body() author: Author) {
         const authors = await this.authorsService.update(authorID, author);
         return authors;
     }
 
     @Delete(':authorID')
+    @ApiResponse({ status: 201, description: 'The author has been successfully deleted.'})
+    @ApiResponse({ status: 403, description: 'Forbidden.'})
     async deleteAuthor(@Param('authorID') authorID) {
         const author = await this.authorsService.delete(authorID);
         return author;

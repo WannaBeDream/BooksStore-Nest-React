@@ -21,7 +21,7 @@ export class BookRepository {
   }
 
   async findOne(id: string): Promise<Book> {
-    const book = await this.bookModel.findOne({ _id: id });
+    const book = await this.bookModel.findOne({ _id: id });   // .populate('authors')
     return book;
   }
 

@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { Book } from 'src/models/book.model';
 import { BookRepository } from 'src/repositories/book.repository';
+import { ApiUseTags, ApiResponse } from '@nestjs/swagger';
 
 @Injectable()
 export class BooksService {
