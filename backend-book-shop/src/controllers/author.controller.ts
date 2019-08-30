@@ -11,7 +11,7 @@ export class AuthorsController {
     constructor(private authorsService: AuthorsService) { }
 
     @Get('')
-    @ApiResponse({ status: 201, description: 'The authors has been successfully fetched.'})
+    @ApiResponse({ status: 201, description: 'The authors has been successfully fetched.', type: Author})
     @ApiResponse({ status: 403, description: 'Forbidden.'})
     async getAuthors(@Response() res) {
         const authors = await this.authorsService.findAll();
@@ -19,7 +19,7 @@ export class AuthorsController {
     }
 
     @Get(':authorID')
-    @ApiResponse({ status: 201, description: 'The author has been successfully fetched.'})
+    @ApiResponse({ status: 201, description: 'The author has been successfully fetched.', type: Author})
     @ApiResponse({ status: 403, description: 'Forbidden.'})
     async getAuthor(@Response() res, @Param('authorID') authorID) {
         const author = await this.authorsService.findOne(authorID);
@@ -28,7 +28,7 @@ export class AuthorsController {
     }
 
     @Post('')
-    @ApiResponse({ status: 201, description: 'The author has been successfully created.'})
+    @ApiResponse({ status: 201, description: 'The author has been successfully created.', type: Author})
     @ApiResponse({ status: 403, description: 'Forbidden.'})
     async addAuthor(@Response() res, @Body() author: Author) {
         const newAuthor = await this.authorsService.create(author);
@@ -39,7 +39,7 @@ export class AuthorsController {
     }
 
     @Put(':authorID')
-    @ApiResponse({ status: 201, description: 'The author has been successfully edited.'})
+    @ApiResponse({ status: 201, description: 'The author has been successfully edited.', type: Author})
     @ApiResponse({ status: 403, description: 'Forbidden.'})
     async editAuthor(@Param('authorID') authorID, @Body() author: Author) {
         const authors = await this.authorsService.update(authorID, author);
@@ -47,7 +47,7 @@ export class AuthorsController {
     }
 
     @Delete(':authorID')
-    @ApiResponse({ status: 201, description: 'The author has been successfully deleted.'})
+    @ApiResponse({ status: 201, description: 'The author has been successfully deleted.', type: Author})
     @ApiResponse({ status: 403, description: 'Forbidden.'})
     async deleteAuthor(@Param('authorID') authorID) {
         const author = await this.authorsService.delete(authorID);
@@ -55,6 +55,8 @@ export class AuthorsController {
     }
 
     @Get('author/:username')
+    @ApiResponse({ status: 201, description: 'The author has been successfully deleted.', type: Author})
+    @ApiResponse({ status: 403, description: 'Forbidden.'})
     async getAuthorByName(@Response() res, @Param('username') author) {
         const fetchedAuthor = await this.authorsService.findOneByUsername(author);
 

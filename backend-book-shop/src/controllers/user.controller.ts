@@ -11,7 +11,7 @@ export class UsersController {
     constructor(private usersService: UsersService) { }
 
     @Get('')
-    @ApiResponse({ status: 201, description: 'The users has been successfully fetched.'})
+    @ApiResponse({ status: 201, description: 'The users has been successfully fetched.', type: User})
     @ApiResponse({ status: 403, description: 'Forbidden.'})
     async getUsers(@Response() res) {
         const users = await this.usersService.findAll();
@@ -19,7 +19,7 @@ export class UsersController {
     }
 
     @Get(':userID')
-    @ApiResponse({ status: 201, description: 'The user has been successfully fetched.'})
+    @ApiResponse({ status: 201, description: 'The user has been successfully fetched.', type: User})
     @ApiResponse({ status: 403, description: 'Forbidden.'})
     async getUser(@Response() res, @Param('userID') userID) {
         const user = await this.usersService.findOne(userID);
@@ -28,7 +28,7 @@ export class UsersController {
     }
 
     @Post('')
-    @ApiResponse({ status: 201, description: 'The user has been successfully fetched.'})
+    @ApiResponse({ status: 201, description: 'The user has been successfully fetched.', type: User})
     @ApiResponse({ status: 403, description: 'Forbidden.'})
     async addUser(@Response() res, @Body() user: User) {
         const newUser = await this.usersService.create(user);
@@ -39,7 +39,7 @@ export class UsersController {
     }
 
     @Put(':userID')
-    @ApiResponse({ status: 201, description: 'The user has been successfully fetched.'})
+    @ApiResponse({ status: 201, description: 'The user has been successfully fetched.', type: User})
     @ApiResponse({ status: 403, description: 'Forbidden.'})
     async editUser(@Param('userID') userID, @Body() user: User) {
         const users = await this.usersService.update(userID, user);
@@ -47,7 +47,7 @@ export class UsersController {
     }
 
     @Delete(':userID')
-    @ApiResponse({ status: 201, description: 'The user has been successfully fetched.'})
+    @ApiResponse({ status: 201, description: 'The user has been successfully fetched.', type: User})
     @ApiResponse({ status: 403, description: 'Forbidden.'})
     async deleteUser(@Param('userID') userID) {
         const user = await this.usersService.delete(userID);
@@ -55,7 +55,7 @@ export class UsersController {
     }
 
     @Get('user/:username')
-    @ApiResponse({ status: 201, description: 'The user has been successfully fetched.'})
+    @ApiResponse({ status: 201, description: 'The user has been successfully fetched.', type: User})
     @ApiResponse({ status: 403, description: 'Forbidden.'})
     async getUserByName(@Response() res, @Param('username') user) {
         const fetchedUser = await this.usersService.findOneByUsername(user);

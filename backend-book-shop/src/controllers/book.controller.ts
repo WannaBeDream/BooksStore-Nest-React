@@ -10,7 +10,7 @@ export class BooksController {
     constructor(private booksService: BooksService) { }
 
     @Get('')
-    @ApiResponse({ status: 201, description: 'The books has been successfully fetched.'})
+    @ApiResponse({ status: 201, description: 'The books has been successfully fetched.', type: Book})
     @ApiResponse({ status: 403, description: 'Forbidden.'})
     async getBooks(@Response() res) {
         const books = await this.booksService.findAll();
@@ -18,7 +18,7 @@ export class BooksController {
     }
 
     @Get(':bookID')
-    @ApiResponse({ status: 201, description: 'The book has been successfully fetched.'})
+    @ApiResponse({ status: 201, description: 'The book has been successfully fetched.', type: Book})
     @ApiResponse({ status: 403, description: 'Forbidden.'})
     async getBook(@Response() res, @Param('bookID') bookID) {
         const book = await this.booksService.findOne(bookID);
@@ -27,7 +27,7 @@ export class BooksController {
     }
 
     @Post('')
-    @ApiResponse({ status: 201, description: 'The book has been successfully fetched.'})
+    @ApiResponse({ status: 201, description: 'The book has been successfully fetched.', type: Book})
     @ApiResponse({ status: 403, description: 'Forbidden.'})
     async addBook(@Response() res, @Body() book: Book) {
         const newBook = await this.booksService.create(book);
@@ -38,7 +38,7 @@ export class BooksController {
     }
 
     @Put(':bookID')
-    @ApiResponse({ status: 201, description: 'The book has been successfully fetched.'})
+    @ApiResponse({ status: 201, description: 'The book has been successfully fetched.', type: Book})
     @ApiResponse({ status: 403, description: 'Forbidden.'})
     async editBook(@Param('bookID') bookID: string, @Body() book: Book) {
         const books = await this.booksService.update(bookID, book);
@@ -46,7 +46,7 @@ export class BooksController {
     }
 
     @Delete(':bookID')
-    @ApiResponse({ status: 201, description: 'The book has been successfully fetched.'})
+    @ApiResponse({ status: 201, description: 'The book has been successfully fetched.', type: Book})
     @ApiResponse({ status: 403, description: 'Forbidden.'})
     async deleteBook(@Param(':bookID') bookID: string) {
         const books = await this.booksService.delete(bookID);
