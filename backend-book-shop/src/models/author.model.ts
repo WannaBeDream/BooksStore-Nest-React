@@ -1,6 +1,10 @@
+import { ApiModelProperty } from '@nestjs/swagger';
 
-export interface Author {
+export class Author {
+    @ApiModelProperty()
     _id: string ;
+    @ApiModelProperty()
     username: string;
+    @ApiModelProperty()
     books: string[];
 }
