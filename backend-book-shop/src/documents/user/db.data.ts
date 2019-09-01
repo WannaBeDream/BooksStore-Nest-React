@@ -5,6 +5,6 @@ export interface User extends Document  {
     username: string;
     email?: string;
     password?: string;
-    typeOfUser?: string;
-    created?: Date;
+    role?: string;
+    createdDate?: Date;
 }

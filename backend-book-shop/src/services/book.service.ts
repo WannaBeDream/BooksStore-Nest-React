@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { Book } from 'src/models/book.model';
 import { BookRepository } from 'src/repositories/book.repository';
-import { ApiUseTags, ApiResponse } from '@nestjs/swagger';
+import { CreateBook } from 'src/models/create/create.book.model';
 
 @Injectable()
 export class BooksService {
@@ -15,11 +15,11 @@ export class BooksService {
         return await this.bookRepository.findOne(id);
     }
 
-    async create(book: Book): Promise<Book> {
+    async create(book: Book): Promise<CreateBook> {
         return await this.bookRepository.create(book);
     }
 
-    async update(id: string, book: Book): Promise<Book> {
+    async update(id: string, book: Book): Promise<CreateBook> {
         const updatedBook = await this.bookRepository.update(id, book);
         return updatedBook;
     }

@@ -1,6 +1,7 @@
 import { Controller, Get, Param, Post, Body, NotFoundException, Delete, Put, Response, HttpStatus } from '@nestjs/common';
 import { UsersService } from 'src/services/user.service';
 import { User } from 'src/models/user.model';
+import { CreateUser } from 'src/models/create/create.user.model';
 import { ApiUseTags, ApiResponse , ApiBearerAuth } from '@nestjs/swagger';
 
 @ApiUseTags('users-controller')
@@ -30,7 +31,7 @@ export class UsersController {
     @Post('')
     @ApiResponse({ status: 201, description: 'The user has been successfully fetched.', type: User})
     @ApiResponse({ status: 403, description: 'Forbidden.'})
-    async addUser(@Response() res, @Body() user: User) {
+    async addUser(@Response() res, @Body() user: CreateUser) {
         const newUser = await this.usersService.create(user);
         return res.status(HttpStatus.OK).json({
             message: 'User has been submitted successfully!',
@@ -41,7 +42,7 @@ export class UsersController {
     @Put(':userID')
     @ApiResponse({ status: 201, description: 'The user has been successfully fetched.', type: User})
     @ApiResponse({ status: 403, description: 'Forbidden.'})
-    async editUser(@Param('userID') userID, @Body() user: User) {
+    async editUser(@Param('userID') userID, @Body() user: CreateUser) {
         const users = await this.usersService.update(userID, user);
         return users;
     }

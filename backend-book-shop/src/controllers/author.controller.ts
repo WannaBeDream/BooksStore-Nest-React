@@ -1,6 +1,7 @@
 import { Controller, Get, Param, Post, Body, NotFoundException, Delete, Put, Response, HttpStatus } from '@nestjs/common';
 import { AuthorsService } from 'src/services/author.service';
 import { Author } from 'src/models/author.model';
+import { CreateAuthor } from 'src/models/create/create.author.model';
 import { ApiUseTags, ApiResponse , ApiBearerAuth } from '@nestjs/swagger';
 
 @ApiUseTags('authors-controller')
@@ -30,7 +31,7 @@ export class AuthorsController {
     @Post('')
     @ApiResponse({ status: 201, description: 'The author has been successfully created.', type: Author})
     @ApiResponse({ status: 403, description: 'Forbidden.'})
-    async addAuthor(@Response() res, @Body() author: Author) {
+    async addAuthor(@Response() res, @Body() author: CreateAuthor) {
         const newAuthor = await this.authorsService.create(author);
         return res.status(HttpStatus.OK).json({
             message: 'Author has been submitted successfully!',
@@ -41,7 +42,7 @@ export class AuthorsController {
     @Put(':authorID')
     @ApiResponse({ status: 201, description: 'The author has been successfully edited.', type: Author})
     @ApiResponse({ status: 403, description: 'Forbidden.'})
-    async editAuthor(@Param('authorID') authorID, @Body() author: Author) {
+    async editAuthor(@Param('authorID') authorID, @Body() author: CreateAuthor) {
         const authors = await this.authorsService.update(authorID, author);
         return authors;
     }

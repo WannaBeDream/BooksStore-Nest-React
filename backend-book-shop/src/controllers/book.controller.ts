@@ -1,6 +1,7 @@
 import { Controller, Get, Param, Post, Body, Query, NotFoundException, Delete, Put, Response, HttpStatus } from '@nestjs/common';
 import { BooksService } from 'src/services/book.service';
 import { Book } from 'src/models/book.model';
+import { CreateBook } from 'src/models/create/create.book.model';
 import { ApiUseTags, ApiResponse , ApiBearerAuth } from '@nestjs/swagger';
 
 @ApiUseTags('books-controller')
@@ -29,7 +30,7 @@ export class BooksController {
     @Post('')
     @ApiResponse({ status: 201, description: 'The book has been successfully fetched.', type: Book})
     @ApiResponse({ status: 403, description: 'Forbidden.'})
-    async addBook(@Response() res, @Body() book: Book) {
+    async addBook(@Response() res, @Body() book: CreateBook) {
         const newBook = await this.booksService.create(book);
         return res.status(HttpStatus.OK).json({
             message:  'Book has been submitted successfully!',
@@ -40,7 +41,7 @@ export class BooksController {
     @Put(':bookID')
     @ApiResponse({ status: 201, description: 'The book has been successfully fetched.', type: Book})
     @ApiResponse({ status: 403, description: 'Forbidden.'})
-    async editBook(@Param('bookID') bookID: string, @Body() book: Book) {
+    async editBook(@Param('bookID') bookID: string, @Body() book: CreateBook) {
         const books = await this.booksService.update(bookID, book);
         return books;
     }

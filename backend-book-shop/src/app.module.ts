@@ -4,7 +4,6 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { PassportModule } from '@nestjs/passport';
 import { JwtModule } from '@nestjs/jwt';
 // Controllers
-import { AppController } from 'src/controllers/app.controller';
 import { BooksController } from 'src/controllers/book.controller';
 import { UsersController } from 'src/controllers/user.controller';
 import { AuthController } from 'src/controllers/auth.controller';
@@ -45,7 +44,7 @@ import { LocalStrategy } from 'src/strategy/local.strategy';
       },
     }),
   ],
-  controllers: [AppController,
+  controllers: [
                 BooksController,
                 AuthController,
                 UsersController,

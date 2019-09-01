@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { AuthorRepository } from 'src/repositories/author.repository';
 import { Author } from 'src/models/author.model';
+import { CreateAuthor } from 'src/models/create/create.author.model';
 
 @Injectable()
 export class AuthorsService {
@@ -14,11 +15,11 @@ export class AuthorsService {
         return await this.authorRepository.findOne(id);
     }
 
-    async create(author: Author): Promise<Author> {
+    async create(author: Author): Promise<CreateAuthor> {
         return await  this.authorRepository.create(author);
     }
 
-    async update(id: string, author: Author): Promise<Author> {
+    async update(id: string, author: Author): Promise<CreateAuthor> {
         const updatedAuthor = await this.authorRepository.update(id, author);
         return updatedAuthor;
     }
