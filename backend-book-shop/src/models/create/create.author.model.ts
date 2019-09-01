@@ -1,8 +1,9 @@
 import { ApiModelProperty } from '@nestjs/swagger';
+import * as mongoose from 'mongoose';
 
 export class CreateAuthor {
     @ApiModelProperty()
     username: string;
     @ApiModelProperty()
-    books: any[];
+    books: [mongoose.Schema.Types.ObjectId];
 }

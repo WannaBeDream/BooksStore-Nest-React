@@ -1,4 +1,5 @@
 import { ApiModelProperty } from '@nestjs/swagger';
+import * as mongoose from 'mongoose';
 
 export class CreateBook  {
     @ApiModelProperty()
@@ -6,7 +7,7 @@ export class CreateBook  {
     @ApiModelProperty()
     description: string;
     @ApiModelProperty()
-    authors?: any[];
+    authors?: [mongoose.Schema.Types.ObjectId];
     @ApiModelProperty()
     coast?: number;
 
