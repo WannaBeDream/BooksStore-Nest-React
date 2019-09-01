@@ -3,7 +3,7 @@ import { BookSchema } from 'src/documents/book/book.schema';
 
 export const AuthorSchema = new mongoose.Schema({
     username: String,
-    items: [{
+    books: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'books',
    }],
