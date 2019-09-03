@@ -6,5 +6,5 @@ export class Author {
     @ApiModelProperty()
     username: string;
     @ApiModelProperty()
-    books: string[];
+    books: any[];
 }

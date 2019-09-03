@@ -20,7 +20,7 @@ export class UserRepository {
   }
 
   async findOne(id: string): Promise<User> {
-    return await this.userModel.findOne({ _id: id });
+    return await this.userModel.findById(id);
   }
 
   async update(id: string, user: User): Promise<CreateUser> {
