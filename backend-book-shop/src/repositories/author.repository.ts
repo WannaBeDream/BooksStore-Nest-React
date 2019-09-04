@@ -14,7 +14,7 @@ export class AuthorRepository {
     const createdAuthor = new this.authorModel(user);
     return await createdAuthor.save((err, createdAuthor) => {
       createdAuthor
-      .populate('authors')
+      .populate('books')
       .execPopulate()
       .then((createdAuthor: object): void => {
           console.log('Author was created now =>  ' + `${createdAuthor}`);
