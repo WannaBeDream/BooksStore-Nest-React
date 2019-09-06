@@ -8,7 +8,7 @@ export class User {
     @ApiModelProperty()
     email?: string;
     @ApiModelProperty()
-    password?: string;
+    password: string;
     @ApiModelProperty()
     role?: string;
     @ApiModelProperty()

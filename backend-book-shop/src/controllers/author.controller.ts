@@ -4,7 +4,7 @@ import { Author } from 'src/models/author.model';
 import { CreateAuthor } from 'src/models/create/create.author.model';
 import { ApiUseTags, ApiResponse , ApiBearerAuth } from '@nestjs/swagger';
 
-@ApiUseTags('authors-controller')
+@ApiUseTags('authors')
 @ApiBearerAuth()
 @Controller('authors')
 export class AuthorsController {

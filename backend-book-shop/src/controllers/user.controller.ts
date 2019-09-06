@@ -1,12 +1,14 @@
-import { Controller, Get, Param, Post, Body, NotFoundException, Delete, Put, Response, HttpStatus } from '@nestjs/common';
+import { Controller, Get, Param, Post, Body, NotFoundException, Delete, Put, Response, HttpStatus, UseGuards  } from '@nestjs/common';
 import { UsersService } from 'src/services/user.service';
 import { User } from 'src/models/user.model';
 import { CreateUser } from 'src/models/create/create.user.model';
-import { ApiUseTags, ApiResponse , ApiBearerAuth } from '@nestjs/swagger';
+import { ApiUseTags, ApiResponse , ApiBearerAuth  } from '@nestjs/swagger';
+import { AuthGuard } from '@nestjs/passport';
 
-@ApiUseTags('users-controller')
+@ApiUseTags('users')
 @ApiBearerAuth()
 @Controller('users')
+@UseGuards(AuthGuard('jwt'))
 export class UsersController {
 
     constructor(private usersService: UsersService) { }

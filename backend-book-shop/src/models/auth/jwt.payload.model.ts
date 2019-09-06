@@ -1,8 +1,8 @@
 import { ApiModelProperty } from '@nestjs/swagger';
 
-export class AuthUser {
+export class JwtPayload {
     @ApiModelProperty()
-    username: string;
+   readonly username: string;
     @ApiModelProperty()
-    password: string;
+   readonly role: string;
 }

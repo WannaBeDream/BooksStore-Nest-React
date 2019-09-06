@@ -32,7 +32,6 @@ import { AuthorRepository } from 'src/repositories/author.repository';
 
 // JWT
 import { JwtStrategy } from 'src/strategy/jwt.strategy';
-import { LocalStrategy } from 'src/strategy/local.strategy';
 
 @Module({
   imports: [
@@ -58,7 +57,6 @@ import { LocalStrategy } from 'src/strategy/local.strategy';
               UserRepository,
               AuthorRepository,
               JwtStrategy,
-              LocalStrategy,
               ...databaseProviders,
               ...booksProviders,
               ...usersProviders,

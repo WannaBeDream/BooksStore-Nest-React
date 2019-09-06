@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { UserRepository } from 'src/repositories/user.repository';
 import { User } from 'src/models/user.model';
 import { CreateUser } from 'src/models/create/create.user.model';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class UsersService {
@@ -15,8 +16,19 @@ export class UsersService {
         return await this.userRepository.findOne(id);
     }
 
-    async create(user: User): Promise<CreateUser> {
-        return await  this.userRepository.create(user);
+    async create(newuser: CreateUser): Promise<CreateUser> {
+    const { username, password, confirmPassword, role, email} = newuser;
+    const salt = await bcrypt.genSalt(10);
+    const user: CreateUser = {
+      username,
+      password: await this.getHash(password, salt),
+      confirmPassword,
+      role,
+      email,
+    };
+    const newUser = this.userRepository.create(user);
+
+    return  newUser;
     }
 
     async update(id: string, user: User): Promise<CreateUser> {
@@ -29,8 +41,16 @@ export class UsersService {
         return deletedUser;
     }
 
-     async findOneByUsername(user: string): Promise<User | undefined> {
-     return await this.userRepository.findOneByName(user);
-  }
+    async findOneByUsername(user: string): Promise<User | undefined> {
+        return await this.userRepository.findOneByName(user);
+    }
+
+    async getHash(password: string, saltRounds: string): Promise<string> {
+        return bcrypt.hash(password, saltRounds);
+    }
+
+    async compareHash(password: string, hash: string): Promise<boolean> {
+        return bcrypt.compare(password, hash);
+    }
 
 }

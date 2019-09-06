@@ -4,7 +4,7 @@ import { Book } from 'src/models/book.model';
 import { CreateBook } from 'src/models/create/create.book.model';
 import { ApiUseTags, ApiResponse , ApiBearerAuth } from '@nestjs/swagger';
 
-@ApiUseTags('books-controller')
+@ApiUseTags('books')
 @ApiBearerAuth()
 @Controller('books')
 export class BooksController {
