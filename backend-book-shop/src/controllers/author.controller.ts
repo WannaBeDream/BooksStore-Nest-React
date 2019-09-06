@@ -1,12 +1,14 @@
-import { Controller, Get, Param, Post, Body, NotFoundException, Delete, Put, Response, HttpStatus } from '@nestjs/common';
+import { Controller, Get, Param, Post, Body, NotFoundException, Delete, Put, Response, HttpStatus, UseGuards } from '@nestjs/common';
 import { AuthorsService } from 'src/services/author.service';
 import { Author } from 'src/models/author.model';
 import { CreateAuthor } from 'src/models/create/create.author.model';
 import { ApiUseTags, ApiResponse , ApiBearerAuth } from '@nestjs/swagger';
+import { AuthGuard } from '@nestjs/passport';
 
 @ApiUseTags('authors')
 @ApiBearerAuth()
 @Controller('authors')
+@UseGuards(AuthGuard('jwt'))
 export class AuthorsController {
 
     constructor(private authorsService: AuthorsService) { }

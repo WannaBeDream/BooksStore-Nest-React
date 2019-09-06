@@ -1,12 +1,14 @@
-import { Controller, Get, Param, Post, Body, Query, NotFoundException, Delete, Put, Response, HttpStatus } from '@nestjs/common';
+import { Controller, Get, Param, Post, Body, Query, NotFoundException, Delete, Put, Response, HttpStatus, UseGuards } from '@nestjs/common';
 import { BooksService } from 'src/services/book.service';
 import { Book } from 'src/models/book.model';
 import { CreateBook } from 'src/models/create/create.book.model';
 import { ApiUseTags, ApiResponse , ApiBearerAuth } from '@nestjs/swagger';
+import { AuthGuard } from '@nestjs/passport';
 
 @ApiUseTags('books')
 @ApiBearerAuth()
 @Controller('books')
+@UseGuards(AuthGuard('jwt'))
 export class BooksController {
     constructor(private booksService: BooksService) { }
 
