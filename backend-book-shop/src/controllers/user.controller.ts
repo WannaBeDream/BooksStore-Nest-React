@@ -4,16 +4,19 @@ import { User } from 'src/models/user.model';
 import { CreateUser } from 'src/models/create/create.user.model';
 import { ApiUseTags, ApiResponse , ApiBearerAuth  } from '@nestjs/swagger';
 import { AuthGuard } from '@nestjs/passport';
+import { RolesGuard } from 'src/Common/guards/roles.guard';
+import { Roles } from 'src/Common/decorators/roles.decorator';
 
 @ApiUseTags('users')
 @ApiBearerAuth()
 @Controller('users')
-@UseGuards(AuthGuard('jwt'))
 export class UsersController {
 
     constructor(private usersService: UsersService) { }
 
     @Get('')
+    @Roles('user')
+    @UseGuards(AuthGuard('jwt'), RolesGuard)
     @ApiResponse({ status: 201, description: 'The users has been successfully fetched.', type: User})
     @ApiResponse({ status: 403, description: 'Forbidden.'})
     async getUsers(@Response() res) {
@@ -22,6 +25,8 @@ export class UsersController {
     }
 
     @Get(':userID')
+    @Roles('user')
+    @UseGuards(AuthGuard('jwt'), RolesGuard)
     @ApiResponse({ status: 201, description: 'The user has been successfully fetched.', type: User})
     @ApiResponse({ status: 403, description: 'Forbidden.'})
     async getUser(@Response() res, @Param('userID') userID) {
@@ -31,6 +36,8 @@ export class UsersController {
     }
 
     @Post('')
+    @Roles('admin')
+    @UseGuards(AuthGuard('jwt'), RolesGuard)
     @ApiResponse({ status: 201, description: 'The user has been successfully fetched.', type: User})
     @ApiResponse({ status: 403, description: 'Forbidden.'})
     async addUser(@Response() res, @Body() user: CreateUser) {
@@ -42,6 +49,8 @@ export class UsersController {
     }
 
     @Put(':userID')
+    @Roles('admin')
+    @UseGuards(AuthGuard('jwt'), RolesGuard)
     @ApiResponse({ status: 201, description: 'The user has been successfully fetched.', type: User})
     @ApiResponse({ status: 403, description: 'Forbidden.'})
     async editUser(@Param('userID') userID, @Body() user: CreateUser) {
@@ -50,6 +59,8 @@ export class UsersController {
     }
 
     @Delete(':userID')
+    @Roles('admin')
+    @UseGuards(AuthGuard('jwt'), RolesGuard)
     @ApiResponse({ status: 201, description: 'The user has been successfully fetched.', type: User})
     @ApiResponse({ status: 403, description: 'Forbidden.'})
     async deleteUser(@Param('userID') userID) {

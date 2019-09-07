@@ -8,6 +8,6 @@ export const UserSchema = new mongoose.Schema({
         default: false,
     },
     email: String,
-    role: String,
+    role: { type: String, default: 'user' },
     createdDate: { type: Date, default: Date.now }, // Время создания пользователя
 });

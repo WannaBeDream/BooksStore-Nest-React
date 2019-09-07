@@ -6,7 +6,8 @@ import { UsersService } from 'src/services/user.service';
 import { AuthUser } from 'src/models/auth/auth.user.model';
 import { CreateUser } from 'src/models/create/create.user.model';
 import { LoginResponse } from 'src/models/login-response.user.model';
-import { User } from 'src/models';
+import { Roles } from 'src/Common/decorators/roles.decorator';
+import { RolesGuard } from 'src/Common/guards/roles.guard';
 
 @ApiUseTags('JWT')
 @ApiBearerAuth()
@@ -30,7 +31,38 @@ constructor(private readonly authService: AuthService, private readonly usersSer
       if (checkedUser) {
           return res.status(HttpStatus.FORBIDDEN).json({ message: 'Username exists' });
         }
-      const newUser: CreateUser = await this.usersService.create(body);
+      const onlyUser = {
+        username: body.username,
+        password: body.password,
+        confirmPassword: body.confirmPassword,
+        email: body.email,
+        role: 'user',
+      };
+      const newUser: CreateUser = await this.usersService.create(onlyUser);
       return res.status(HttpStatus.OK).json(newUser);
   }
+
+  @Post('registration/admin')
+  @Roles('admin')
+  @UseGuards(AuthGuard('jwt'), RolesGuard)
+  async registerAdmin(@Response() res: any, @Body() body: CreateUser) {
+      if (!(body && body.username && body.password)) {
+        return res.status(HttpStatus.FORBIDDEN).json({ message: 'Username and password are required!' });
+      }
+      const checkedAdmin = await this.usersService.findOneByUsername(body.username);
+
+      if (checkedAdmin) {
+          return res.status(HttpStatus.FORBIDDEN).json({ message: 'Username exists' });
+        }
+      const createdAdmin = {
+        username: body.username,
+        password: body.password,
+        confirmPassword: body.confirmPassword,
+        email: body.email,
+        role: 'admin',
+      };
+      const newAdmin: CreateUser = await this.usersService.create(createdAdmin);
+      return res.status(HttpStatus.OK).json(newAdmin);
+  }
+  
 }

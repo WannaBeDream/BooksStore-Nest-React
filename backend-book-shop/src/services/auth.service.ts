@@ -4,7 +4,6 @@ import { JwtService } from '@nestjs/jwt';
 import { AuthUser } from 'src/models/auth/auth.user.model';
 import { JwtPayload } from 'src/models/auth/jwt.payload.model';
 import { LoginResponse } from 'src/models/login-response.user.model';
-import { compare } from 'bcrypt';
 
 @Injectable()
 export class AuthService {
@@ -33,7 +32,7 @@ export class AuthService {
         if (!user) {
           throw  new HttpException('Invalid credentials', HttpStatus.BAD_REQUEST);
         }
-        const isMath: boolean = await compare(password, user.password);
+        const isMath: boolean = await this.usersService.compareHash(password, user.password);
         if (!isMath) {
           throw  new HttpException(`Invalid credentials ${password} and ${user.password}`, HttpStatus.BAD_REQUEST);
         }
