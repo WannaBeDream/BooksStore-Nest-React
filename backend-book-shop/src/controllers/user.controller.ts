@@ -1,4 +1,4 @@
-import { Controller, Get, Param, Post, Body, NotFoundException, Delete, Put, Response, HttpStatus, UseGuards  } from '@nestjs/common';
+import { Controller, Get, Param, Post, Body, NotFoundException, Delete, Put, Response, HttpStatus, UseGuards, Headers  } from '@nestjs/common';
 import { UsersService } from 'src/services/user.service';
 import { User } from 'src/models/user.model';
 import { CreateUser } from 'src/models/create/create.user.model';
@@ -15,18 +15,17 @@ export class UsersController {
     constructor(private usersService: UsersService) { }
 
     @Get('')
-    @Roles('user')
-    @UseGuards(AuthGuard('jwt'), RolesGuard)
+    @UseGuards(AuthGuard('jwt'))
     @ApiResponse({ status: 201, description: 'The users has been successfully fetched.', type: User})
     @ApiResponse({ status: 403, description: 'Forbidden.'})
-    async getUsers(@Response() res) {
+    async getUsers(@Response() res, @Headers() headers) {
+        console.log(headers.authorization);                                       // TODO (Bearer token)
         const users = await this.usersService.findAll();
         return res.status(HttpStatus.OK).json(users);
     }
 
     @Get(':userID')
-    @Roles('user')
-    @UseGuards(AuthGuard('jwt'), RolesGuard)
+    @UseGuards(AuthGuard('jwt'))
     @ApiResponse({ status: 201, description: 'The user has been successfully fetched.', type: User})
     @ApiResponse({ status: 403, description: 'Forbidden.'})
     async getUser(@Response() res, @Param('userID') userID) {
