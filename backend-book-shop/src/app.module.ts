@@ -9,7 +9,6 @@ import { UsersController } from 'src/controllers/user.controller';
 import { AuthController } from 'src/controllers/auth.controller';
 import { AuthorsController } from 'src/controllers/author.controller';
 // Services
-// import { AppService } from 'src/services/app.service';
 import { BooksService } from 'src/services/book.service';
 import { UsersService } from 'src/services/user.service';
 import { AuthService } from 'src/services/auth.service';

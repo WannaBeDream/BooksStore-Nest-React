@@ -65,7 +65,7 @@ constructor(private readonly authService: AuthService, private readonly usersSer
       return res.status(HttpStatus.OK).json(newAdmin);
   }
 
-  @Put('changeMe/:userID')
+  @Put('changeMe/:userID') // TODO
   @UseGuards(AuthGuard('jwt'))
   async changeMe(@Response() res: any, @Body() body: CreateUser, @Param('userID') userID) {
   if (!(body && body.username && body.password)) {

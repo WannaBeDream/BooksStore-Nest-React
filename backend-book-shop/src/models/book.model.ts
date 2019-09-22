@@ -4,12 +4,12 @@ export class Book  {
     @ApiModelProperty()
     id?: string;
     @ApiModelProperty()
-    title?: string;
+    title: string;
     @ApiModelProperty()
     description: string;
     @ApiModelProperty()
-    authors?: any[];
+    authors: any[];
     @ApiModelProperty()
-    coast?: number;
+    coast: number;
 
 }

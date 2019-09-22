@@ -1,9 +1,9 @@
 import { Document, Schema } from 'mongoose';
 
-export interface Book extends Document {
+export interface BookDoc extends Document {
   readonly  id?: string;
-  readonly  title?: string;
+  readonly  title: string;
   readonly  description: string;
-  readonly  authors?: any[];
-  readonly  coast?: number;
+  readonly  authors: any[];
+  readonly  coast: number;
 }
